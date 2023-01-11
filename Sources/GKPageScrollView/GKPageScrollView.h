@@ -196,6 +196,8 @@
 // listScrollView是否可滑动
 @property (nonatomic, assign) BOOL isListCanScroll;
 
+@property (nonatomic, getter=isHokCeilPoint, assign) BOOL hokCeilPoint;
+
 - (instancetype)initWithDelegate:(id <GKPageScrollViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
