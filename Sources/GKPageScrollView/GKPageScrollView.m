@@ -93,6 +93,7 @@
     if (@available(iOS 15.0, *)) {
         [self.mainTableView setValue:@(0) forKey:@"sectionHeaderTopPadding"];
     }
+    
     [self addSubview:self.mainTableView];
     [self refreshHeaderView];
     
@@ -172,7 +173,7 @@
     // 判断加载方式
     if ([self shouldLazyLoadListView]) {
         [self.listContainerView reloadData];
-    }else {
+    } else {
         [self configListViewScroll];
     }
     
@@ -354,16 +355,19 @@
     
     if (self.isScrollToOriginal || self.isScrollToCritical) return;
     
+    BOOL isCeilPoint = round(offsetY) == round(self.criticalPoint);
+    BOOL hokCeilPoint = self.isHokCeilPoint && isCeilPoint;
+    
     // 根据偏移量判断是否上滑到临界点
-    if (offsetY >= self.criticalPoint) {
+    if (offsetY >= self.criticalPoint || hokCeilPoint) {
         self.isCriticalPoint = YES;
-    }else {
+    } else {
         self.isCriticalPoint = NO;
     }
     
     // 无偏差临界点，对float值取整判断
     if (!self.isCeilPoint ) {
-        if (round(offsetY) == round(self.criticalPoint)) {
+        if (isCeilPoint) {
             self.isCeilPoint = YES;
         }
     }
@@ -396,8 +400,7 @@
                     if (self.isMainCanScroll) {
                         // 未达到临界点，mainScrollview可滑动，需要重置所有listScrollView的位置
                         [self listScrollViewOffsetFixed];
-                    }else {
-                        
+                    } else {
                         // 未到达临界点，mainScrollView不可滑动，固定mainScrollView的位置
                         [self mainScrollViewOffsetFixed];
                     }
@@ -474,7 +477,7 @@
         self.listContainerView.frame = CGRectMake(x, y, w, h);
         [pageView addSubview:segmentedView];
         [pageView addSubview:self.listContainerView];
-    }else {
+    } else {
         pageView = [self.delegate pageViewInPageScrollView:self];
     }
     height -= (self.isMainScrollDisabled ? self.headerHeight : self.ceilPointHeight);

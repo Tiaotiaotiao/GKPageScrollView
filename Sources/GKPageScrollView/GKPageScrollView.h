@@ -217,6 +217,9 @@
 @property (nonatomic, assign) BOOL isListCanScroll;
 
 - (instancetype)initWithDelegate:(id<GKPageScrollViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, getter=isHokCeilPoint, assign) BOOL hokCeilPoint;
+
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
