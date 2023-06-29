@@ -220,6 +220,8 @@
 
 @property (nonatomic, getter=isHokCeilPoint, assign) BOOL hokCeilPoint;
 
+@property (nonatomic, getter=isHokListScrollDisable, assign) BOOL hokListScrollDisable;
+
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;

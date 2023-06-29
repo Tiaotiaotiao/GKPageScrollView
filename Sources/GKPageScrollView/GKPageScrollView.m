@@ -333,6 +333,10 @@
                 }
             }
         }else {
+            if (self.isHokListScrollDisable) {
+                return;
+            }
+            
             [self setScrollView:scrollView offset:CGPointZero];
         }
     }
@@ -400,6 +404,8 @@
                     if (self.isMainCanScroll) {
                         // 未达到临界点，mainScrollview可滑动，需要重置所有listScrollView的位置
                         [self listScrollViewOffsetFixed];
+                        
+                      
                     } else {
                         // 未到达临界点，mainScrollView不可滑动，固定mainScrollView的位置
                         [self mainScrollViewOffsetFixed];
@@ -420,6 +426,11 @@
 // 修正listScrollView的位置
 - (void)listScrollViewOffsetFixed {
     if ([self shouldLazyLoadListView]) {
+        
+        if (self.isHokListScrollDisable) {
+            return;
+        }
+        
         for (id<GKPageListViewDelegate> listItem in self.validListDict.allValues) {
             UIScrollView *listScrollView = [listItem listScrollView];
             [self setScrollView:listScrollView offset:CGPointZero];
