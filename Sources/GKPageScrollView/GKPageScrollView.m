@@ -541,6 +541,9 @@
     if (self.showInFooter) return 0;
     CGFloat height = self.frame.size.height == 0 ? GKPAGE_SCREEN_HEIGHT : self.frame.size.height;
     height -= (self.isMainScrollDisabled ? self.headerHeight : self.ceilPointHeight);
+    
+    height = height < 0 ? 0 : height;
+    
     return height;
 }
 
